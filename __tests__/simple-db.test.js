@@ -22,4 +22,29 @@ describe('simple database', () => {
     await fs.writeFile(filePath, JSON.stringify(newFile));
     expect(await firstDb.get(newFile.id)).toEqual(newFile);
   });
+
+  it('checks for ENOENT in the implemenation, to check it returns a not found error', async () => {
+    const firstDb = new SimpleDB(TEST_DIR);
+
+    const newObject = {
+      name: 'test name',
+      text: 'I do not follow',
+      id: '1',
+    };
+    fs.writeFile(TEST_DIR + '/' + 1 + '.txt', JSON.stringify(newObject));
+
+    const result = await firstDb.get(1);
+    expect(result.message).toEqual('Not Found');
+  });
+
+  it('Takes an object, assigns a random id (sets an id property) and the serializes (JSON.stringify) the object into a file of name [id].json.', async () => {
+    const firstDb = new SimpleDB(TEST_DIR);
+    const newObject = {
+      name: 'test name',
+      text: 'I do not follow',
+    };
+    return firstDb
+      .save(newObject)
+      .then(() => expect(newObject.id).toEqual(expect.any(String)));
+  });
 });
