@@ -31,7 +31,7 @@ describe('simple database', () => {
       text: 'I do not follow',
       id: '1',
     };
-    fs.writeFile(TEST_DIR + '/' + 1 + '.json', JSON.stringify(newObject));
+    fs.writeFile(TEST_DIR + '/' + '1' + '.json', JSON.stringify(newObject));
 
     const result = await firstDb.get(1);
     expect(result.message).toEqual('Not Found');
