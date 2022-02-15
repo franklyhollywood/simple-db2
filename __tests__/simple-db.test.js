@@ -33,7 +33,7 @@ describe('simple database', () => {
     };
     fs.writeFile(TEST_DIR + '/' + '1' + '.json', JSON.stringify(newObject));
 
-    const result = await firstDb.get(1);
+    const result = await firstDb.get(8);
     expect(result.message).toEqual('Not Found');
   });
 
