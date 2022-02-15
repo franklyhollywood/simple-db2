@@ -47,4 +47,35 @@ describe('simple database', () => {
       .save(newObject)
       .then(() => expect(newObject.id).toEqual(expect.any(String)));
   });
+
+  it('Get all the objects in the directory', async () => {
+    const firstDb = new SimpleDB(TEST_DIR);
+    const newObject1 = {
+      name: 'test name',
+      text: 'I do not follow',
+    };
+    const newObject2 = {
+      name: 'I love you',
+      text: 'Eat things',
+    };
+    await firstDb.save(newObject1);
+    await firstDb.save(newObject2);
+
+    const allObjects = await firstDb.getAll();
+
+    expect(allObjects).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(String),
+          name: 'test name',
+          text: 'I do not follow',
+        },
+        {
+          id: expect.any(String),
+          name: 'I love you',
+          text: 'Eat things',
+        },
+      ])
+    );
+  });
 });
