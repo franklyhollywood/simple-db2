@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 const path = require('path');
-const SimpleDB = require('../lib/simple-DB.js');
+const SimpleDB = require('../lib/simple-db.js');
 
 const { CI, HOME } = process.env;
 const BASE_DIR = CI ? HOME : __dirname;
